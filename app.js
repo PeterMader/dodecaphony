@@ -1,14 +1,25 @@
 const player = new Player()
 const dodecaphony = new Dodecaphony()
+// const dodecaphony = new Piece()
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('start').addEventListener('click', player.play.bind(player))
   document.getElementById('toggle-pause').addEventListener('click', player.togglePause.bind(player))
   const notesContainer = document.getElementById('notes')
 
-  dodecaphony.create(2)
+  dodecaphony.create(10)
+  // const note = new Note({
+  //   halfTones: 0,
+  //   duration: 4,
+  //   volume: .5,
+  //   startTime: 0,
+  //   type: Note.types.TRIANGLE,
+  //   envelope: [0, 0, .05, .9, .2, 1, .9, .9, 1, 0],
+  // })
+  //
+  // dodecaphony.addNotes(note, note.clone().setEnvelope([]).setStartTime(4))
 
-  dodecaphony.setVelocity(6)
+  dodecaphony.setVelocity(2)
   player.setPiece(dodecaphony)
 
   player.on('error', console.log)

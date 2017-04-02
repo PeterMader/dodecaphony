@@ -18,16 +18,17 @@ const Dodecaphony = class extends Piece {
         const frequency = Note.halfTonesToFrequency(halfTones)
         const note = new Note({
           startTime: i * 12 + Math.random() * 6 - 4 + j,
-          duration: 10 / (Math.random() * 8 + 1),
+          duration: 4 / Math.round(Math.random() * 7 + 1), // random float from 1/8 to 1/1
           frequency,
           volume,
           type: Dodecaphony.randomNoteType(),
+          envelope: [0, 0, .05, .9, .2, 1, .9, .9, 1, 0],
           name: Note.halfTonesToName(halfTones)
         })
 
-        if (Math.random() < .2) {
+        if (Math.random() < .1) {
           note.duration = .25
-          const length = Math.round(Math.random() * 3) + 2
+          const length = Math.round(Math.random() * 2) + 2 // random int from 2 to 4
           let i
           for (i = 0; i < length; i += 1) {
             this.addNote(note.clone().setStartTime(note.startTime + .3 * i))
@@ -55,12 +56,12 @@ const Dodecaphony = class extends Piece {
 
   randomTransformation (row) {
     const random = Math.random()
-    if (random < .3) {
+    if (random < .4) {
       const interval = Math.round(Math.random() * 6) - 3
       this.rowNames.push(`Transposition (${interval})`)
       return Dodecaphony.transposeRow(row, interval)
     }
-    if (random < .5) {
+    if (random < .7) {
       this.rowNames.push('Retrograde')
       return Dodecaphony.retrograde(row)
     }
